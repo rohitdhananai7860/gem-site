@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jem and the Holograms: Truly Outrageous!</title>
+    <!-- Google Fonts: Inter for general text -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Pacifico for a more playful, thematic touch -->
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Orbitron for a futuristic, techy feel -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom CSS and Animations */
+        :root {
+            --jem-pink: #FF69B4; /* Hot Pink */
+            --jem-purple: #8A2BE2; /* Blue Violet */
+            --jem-blue: #1E90FF; /* Dodger Blue */
+            --jem-gold: #FFD700; /* Gold */
+            --jem-light-gray: #F3F4F6;
+            --jem-dark-gray: #1F2937;
+            --jem-text-color: #E5E7EB; /* Lighter text for dark background */
+            --jem-bg-dark: #0A0A1A; /* Even darker background */
+            --jem-bg-medium: #1A1A2E;
+            --jem-bg-light: #2A2A4A;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--jem-bg-dark), var(--jem-bg-medium), var(--jem-bg-dark));
+            color: var(--jem-text-color);
+            line-height: 1.6;
+            overflow-x: hidden; /* Prevent horizontal scroll from animations */
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--jem-bg-dark);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--jem-pink);
+            border-radius: 6px;
+            border: 3px solid var(--jem-bg-dark);
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #E05BA0;
+        }
+
+        /* Hero Section Animations */
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 8px var(--jem-pink), 0 0 20px var(--jem-pink), 0 0 30px var(--jem-pink); }
+            50% { text-shadow: 0 0 15px var(--jem-purple), 0 0 35px var(--jem-purple), 0 0 50px var(--jem-purple); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.9; }
+            50% { transform: scale(1.08); opacity: 1; box-shadow: 0 0 25px rgba(var(--jem-gold-rgb), 0.8); }
+            100% { transform: scale(1); opacity: 0.9; }
+        }
+
+        @keyframes slideInUp {
+            from { transform: translateY(80px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes backgroundPan {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes sparkle {
+            0% { opacity: 0; transform: scale(0.5); }
+            50% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(1.5); }
+        }
+
+        .hero-title {
+            font-family: 'Pacifico', cursive;
+            animation: glow 3s infinite alternate, slideInUp 1s ease-out forwards;
+            animation-delay: 0.5s;
+            opacity: 0; /* Hidden initially for animation */
+        }
+
+        .hero-subtitle {
+            animation: fadeIn 1.5s ease-out forwards;
+            animation-delay: 1.5s;
+            opacity: 0;
+            font-family: 'Orbitron', sans-serif; /* Futuristic font for subtitle */
+        }
+
+        .hero-button {
+            animation: pulse 2s infinite ease-in-out, fadeIn 1.5s ease-out forwards;
+            animation-delay: 2s;
+            opacity: 0;
+        }
+
+        .sparkle-effect {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            animation: sparkle 2s infinite ease-out;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Section Entrance Animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Card Hover Effects */
+        .card-hover-effect {
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .card-hover-effect:hover {
+            transform: translateY(-15px) scale(1.03) rotateZ(-1deg);
+            box-shadow: 0 20px 40px rgba(var(--jem-pink-rgb), 0.5);
+            z-index: 10; /* Bring to front on hover */
+        }
+        .card-hover-effect::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+            transform: translateX(-100%);
+            transition: transform 0.5s ease;
+        }
+        .card-hover-effect:hover::before {
+            transform: translateX(100%);
+        }
+
+        /* Parallax Background */
+        .parallax-section {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+            overflow: hidden;
+        }
+        .parallax-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4); /* Dark overlay */
+            z-index: 1;
+        }
+        .parallax-section span {
+            position: relative;
+            z-index: 2;
+        }
+
+        .parallax-jem {
+            background-image: url('https://placehold.co/1920x1080/FF69B4/FFFFFF?text=JEM+Holograms+Stage');
+        }
+        .parallax-misfits {
+            background-image: url('https://placehold.co/1920x1080/8B0000/FFFFFF?text=Misfits+Riot');
+        }
+
+        /* Navbar */
+        .navbar-sticky {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(15px);
+            background-color: rgba(10, 10, 26, 0.9); /* More transparent */
+            border-bottom: 1px solid rgba(255, 105, 180, 0.3);
+        }
+        .navbar-sticky a {
+            position: relative;
+        }
+        .navbar-sticky a::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -5px;
+            width: 0;
+            height: 2px;
+            background-color: var(--jem-pink);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        .navbar-sticky a:hover::after {
+            width: 100%;
+        }
+
+        /* Back to Top Button */
+        #backToTopBtn {
+            display: none; /* Hidden by default */
+            position: fixed; /* Fixed/sticky position */
+            bottom: 30px; /* Place the button at the bottom of the page */
+            right: 30px; /* Place the button 30px from the right */
+            z-index: 999; /* Make sure it does not overlap */
+            border: none; /* Remove borders */
+            outline: none; /* Remove outline */
+            background-color: var(--jem-pink); /* Set a background color */
+            color: white; /* Text color */
+            cursor: pointer; /* Add a mouse pointer on hover */
+            padding: 18px; /* Some padding */
+            border-radius: 50%; /* Rounded corners */
+            font-size: 20px; /* Increase font size */
+            box-shadow: 0 6px 16px rgba(var(--jem-pink-rgb), 0.7);
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        #backToTopBtn:hover {
+            background-color: var(--jem-purple);
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 10px 20px rgba(var(--jem-purple-rgb), 0.8);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); /* Springy animation */
+            transform: translateX(100%);
+            background-color: var(--jem-bg-medium);
+            border-left: 2px solid var(--jem-pink);
+        }
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+        .mobile-menu a {
+            padding: 1rem;
+            border-radius: 0.75rem;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+        .mobile-menu a:hover {
+            background-color: rgba(var(--jem-pink-rgb), 0.2);
+            transform: translateX(-5px);
+        }
+
+
+        /* Image Gallery Modal */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 2000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.95); /* Darker w/ opacity */
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 1rem;
+            box-shadow: 0 0 50px rgba(var(--jem-pink-rgb), 0.7);
+            animation: zoomIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); /* Springy zoom */
+        }
+
+        @keyframes zoomIn {
+            from { transform: scale(0.5); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            color: #f1f1f1;
+            font-size: 48px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+            text-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
+
+        .close-modal:hover,
+        .close-modal:focus {
+            color: var(--jem-pink);
+            text-decoration: none;
+            cursor: pointer;
+            transform: rotate(90deg);
+        }
+
+        /* Canvas Animation */
+        #starCanvas {
+            position: fixed; /* Fixed to viewport */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Behind other content */
+            pointer-events: none; /* Allow clicks to pass through */
+            opacity: 0.8;
+        }
+
+        /* Utility classes for RGB conversion for shadows */
+        .shadow-jem-pink { --jem-pink-rgb: 255, 105, 180; }
+        .shadow-jem-purple { --jem-purple-rgb: 138, 43, 226; }
+        .shadow-jem-gold { --jem-gold-rgb: 255, 215, 0; }
+
+        /* Product Card specific styles */
+        .product-card {
+            background-color: var(--jem-bg-medium);
+            border: 2px solid var(--jem-gold);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(var(--jem-gold-rgb), 0.4);
+        }
+        .product-card img {
+            border-radius: 1rem;
+            border: 3px solid var(--jem-pink);
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+        .product-card:hover img {
+            transform: scale(1.05) rotateZ(2deg);
+        }
+        .product-card button {
+            background-color: var(--jem-pink);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px; /* Full rounded */
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .product-card button:hover {
+            background-color: var(--jem-purple);
+            transform: scale(1.05);
+        }
+
+        /* Tour Dates Section */
+        .tour-date-item {
+            background-color: var(--jem-bg-medium);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .tour-date-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 8px 20px rgba(var(--jem-blue-rgb), 0.3);
+            border-left: 5px solid var(--jem-blue);
+        }
+        .tour-date-item .date {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            color: var(--jem-gold);
+        }
+        .tour-date-item .location {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        .tour-date-item .details {
+            color: var(--jem-light-gray);
+        }
+
+        /* Text typing animation */
+        .typewriter h2 {
+            overflow: hidden; /* Ensures the content is not revealed until the animation */
+            border-right: .15em solid var(--jem-pink); /* The typwriter cursor */
+            white-space: nowrap; /* Keeps the content on a single line */
+            margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+            letter-spacing: .15em; /* Adjust as needed */
+            animation:
+                typing 3.5s steps(40, end),
+                blink-caret .75s step-end infinite;
+        }
+
+        /* The typing effect */
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        /* The typewriter cursor effect */
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--jem-pink); }
+        }
+
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-200">
+    <!-- Canvas for background animation -->
+    <canvas id="starCanvas"></canvas>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar-sticky p-4 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="#" class="text-3xl font-bold text-jem-pink font-pacifico tracking-wider">JEM</a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#hero" class="text-lg font-semibold hover:text-jem-pink transition-colors duration-300">Home</a>
+                <a href="#about" class="text-lg font-semibold hover:text-jem-pink transition-colors duration-300">About Jem</a>
+                <a href="#holograms" class="text-lg font-semibold hover:text-jem-pink transition-colors duration-300">The Holograms</a>
+                <a href="#music" class="text-lg font-semibold hover:text-jem-pink transition-colors duration-300">Music</a>
+                <a href="#misfits" class="text-lg font-semibold hover:text-jem-pink transition-colors duration-300">The Misfits</a>
+                <a href="#products" class="text-lg font-semibold hover:text-jem-pink transition-colors duration-300">Products</a>
+                <a href="#tour" class="text-lg font-semibold hover:text-jem-pink transition-colors duration-300">Tour</a>
+                <a href="#gallery" class="text-lg font-semibold hover:text-jem-pink transition-colors duration-300">Gallery</a>
+                <a href="#contact" class="text-lg font-semibold hover:text-jem-pink transition-colors duration-300">Contact</a>
+            </div>
+            <!-- Mobile Menu Button -->
+            <button id="mobileMenuBtn" class="md:hidden text-jem-pink text-2xl focus:outline-none">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobileMenu" class="mobile-menu fixed top-0 right-0 w-64 h-full shadow-xl z-1000 p-6 flex flex-col space-y-4 md:hidden">
+        <button id="closeMobileMenuBtn" class="self-end text-jem-pink text-3xl focus:outline-none">
+            <i class="fas fa-times"></i>
+        </button>
+        <a href="#hero" class="text-xl font-semibold text-white hover:text-jem-pink transition-colors duration-300" onclick="document.getElementById('mobileMenu').classList.remove('active');">Home</a>
+        <a href="#about" class="text-xl font-semibold text-white hover:text-jem-pink transition-colors duration-300" onclick="document.getElementById('mobileMenu').classList.remove('active');">About Jem</a>
+        <a href="#holograms" class="text-xl font-semibold text-white hover:text-jem-pink transition-colors duration-300" onclick="document.getElementById('mobileMenu').classList.remove('active');">The Holograms</a>
+        <a href="#music" class="text-xl font-semibold text-white hover:text-jem-pink transition-colors duration-300" onclick="document.getElementById('mobileMenu').classList.remove('active');">Music</a>
+        <a href="#misfits" class="text-xl font-semibold text-white hover:text-jem-pink transition-colors duration-300" onclick="document.getElementById('mobileMenu').classList.remove('active');">The Misfits</a>
+        <a href="#products" class="text-xl font-semibold text-white hover:text-jem-pink transition-colors duration-300" onclick="document.getElementById('mobileMenu').classList.remove('active');">Products</a>
+        <a href="#tour" class="text-xl font-semibold text-white hover:text-jem-pink transition-colors duration-300" onclick="document.getElementById('mobileMenu').classList.remove('active');">Tour</a>
+        <a href="#gallery" class="text-xl font-semibold text-white hover:text-jem-pink transition-colors duration-300" onclick="document.getElementById('mobileMenu').classList.remove('active');">Gallery</a>
+        <a href="#contact" class="text-xl font-semibold text-white hover:text-jem-pink transition-colors duration-300" onclick="document.getElementById('mobileMenu').classList.remove('active');">Contact</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="hero" class="relative h-screen flex items-center justify-center text-center overflow-hidden bg-gradient-to-br from-purple-900 via-pink-800 to-blue-900 animate-[backgroundPan_20s_ease_infinite]">
+        <div class="absolute inset-0 bg-cover bg-center opacity-20" style="background-image: url('https://placehold.co/1920x1080/FF69B4/FFFFFF?text=Jem+Background+Pattern');"></div>
+        <!-- Dynamic Sparkle Overlay -->
+        <div id="sparkleOverlay" class="absolute inset-0 z-0"></div>
+
+        <div class="relative z-10 p-6 max-w-4xl mx-auto">
+            <h1 class="hero-title text-6xl md:text-8xl font-extrabold text-white mb-4 leading-tight">
+                Jem and the Holograms
+            </h1>
+            <p class="hero-subtitle text-2xl md:text-3xl font-light text-jem-light-gray mb-8">
+                Truly Outrageous!
+            </p>
+            <a href="#about" class="hero-button inline-block bg-jem-pink text-white text-xl md:text-2xl font-bold py-4 px-8 rounded-full shadow-lg hover:bg-jem-purple transition-all duration-300 transform hover:scale-105">
+                Discover the Magic <i class="fas fa-star ml-2"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- About Jem Section -->
+    <section id="about" class="py-20 px-4 bg-gray-900 text-gray-200 animate-on-scroll">
+        <div class="container mx-auto flex flex-col md:flex-row items-center gap-12">
+            <div class="md:w-1/2">
+                <img src="https://placehold.co/600x400/FF69B4/FFFFFF?text=Jem+Portrait" alt="Jem Portrait" class="rounded-3xl shadow-2xl border-4 border-jem-pink transform rotate-3 hover:rotate-0 transition-transform duration-500 card-hover-effect">
+            </div>
+            <div class="md:w-1/2 text-center md:text-left">
+                <h2 class="text-5xl font-bold text-jem-pink mb-6 font-pacifico">About Jem</h2>
+                <p class="text-lg mb-4 leading-relaxed">
+                    Jem, also known as Jerrica Benton, is the lead singer of the sensational band Jem and the Holograms. With her incredible musical talent, charismatic stage presence, and the help of Synergy, a powerful holographic computer, Jem leads her band to stardom while battling the villainous Misfits.
+                </p>
+                <p class="text-lg mb-4 leading-relaxed">
+                    Her story is one of friendship, music, and the power of believing in yourself. Jerrica's dual identity as the shy, compassionate businesswoman and the glamorous, rock-star Jem highlights themes of inner strength and transformation.
+                </p>
+                <p class="text-lg leading-relaxed">
+                    Synergy, created by Jerrica's father, Emmett Benton, is the source of Jem's holographic abilities, allowing her to project dazzling illusions and create truly outrageous performances.
+                </p>
+                <a href="#holograms" class="inline-block mt-6 bg-jem-purple text-white text-lg font-bold py-3 px-6 rounded-full shadow-lg hover:bg-jem-pink transition-all duration-300 transform hover:scale-105">
+                    Meet the Band <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Parallax Section 1 - Jem -->
+    <section class="parallax-section parallax-jem h-[50vh] flex items-center justify-center text-white text-5xl font-bold text-shadow-lg">
+        <span class="bg-black bg-opacity-50 p-6 rounded-lg font-orbitron">"Showtime, Synergy!"</span>
+    </section>
+
+    <!-- The Holograms Section -->
+    <section id="holograms" class="py-20 px-4 bg-gray-800 text-gray-200 animate-on-scroll">
+        <div class="container mx-auto text-center">
+            <h2 class="text-5xl font-bold text-jem-blue mb-12 font-pacifico typewriter">The Holograms</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+                <!-- Jem Card -->
+                <div class="bg-gray-700 p-8 rounded-3xl shadow-xl border-4 border-jem-pink card-hover-effect">
+                    <img src="https://placehold.co/300x300/FF69B4/FFFFFF?text=Jem" alt="Jem" class="w-48 h-48 mx-auto rounded-full border-4 border-jem-gold mb-6 object-cover">
+                    <h3 class="text-3xl font-bold text-jem-pink mb-3">Jem (Jerrica Benton)</h3>
+                    <p class="text-md leading-relaxed">
+                        The lead singer and heart of the band. Jerrica transforms into Jem with the help of Synergy, bringing music and magic to the world. She's compassionate, determined, and truly outrageous.
+                    </p>
+                    <div class="mt-4 text-jem-gold text-2xl">
+                        <i class="fas fa-microphone"></i> <i class="fas fa-star"></i> <i class="fas fa-music"></i>
+                    </div>
+                </div>
+
+                <!-- Kimber Benton Card -->
+                <div class="bg-gray-700 p-8 rounded-3xl shadow-xl border-4 border-jem-purple card-hover-effect">
+                    <img src="https://placehold.co/300x300/8A2BE2/FFFFFF?text=Kimber" alt="Kimber Benton" class="w-48 h-48 mx-auto rounded-full border-4 border-jem-gold mb-6 object-cover">
+                    <h3 class="text-3xl font-bold text-jem-purple mb-3">Kimber Benton</h3>
+                    <p class="text-md leading-relaxed">
+                        Jerrica's younger sister, Kimber is the keyboardist and songwriter for The Holograms. She's energetic, sometimes impulsive, and always ready for adventure.
+                    </p>
+                    <div class="mt-4 text-jem-gold text-2xl">
+                        <i class="fas fa-keyboard"></i> <i class="fas fa-pen-nib"></i> <i class="fas fa-fire"></i>
+                    </div>
+                </div>
+
+                <!-- Aja Leith Card -->
+                <div class="bg-gray-700 p-8 rounded-3xl shadow-xl border-4 border-jem-blue card-hover-effect">
+                    <img src="https://placehold.co/300x300/1E90FF/FFFFFF?text=Aja" alt="Aja Leith" class="w-48 h-48 mx-auto rounded-full border-4 border-jem-gold mb-6 object-cover">
+                    <h3 class="text-3xl font-bold text-jem-blue mb-3">Aja Leith</h3>
+                    <p class="text-md leading-relaxed">
+                        The cool and collected lead guitarist. Aja is a tech whiz and a loyal friend, always there to back up Jem with her shredding guitar riffs and quick thinking.
+                    </p>
+                    <div class="mt-4 text-jem-gold text-2xl">
+                        <i class="fas fa-guitar"></i> <i class="fas fa-laptop-code"></i> <i class="fas fa-brain"></i>
+                    </div>
+                </div>
+
+                <!-- Shana Elmsford Card -->
+                <div class="bg-gray-700 p-8 rounded-3xl shadow-xl border-4 border-jem-pink card-hover-effect">
+                    <img src="https://placehold.co/300x300/FF69B4/FFFFFF?text=Shana" alt="Shana Elmsford" class="w-48 h-48 mx-auto rounded-full border-4 border-jem-gold mb-6 object-cover">
+                    <h3 class="text-3xl font-bold text-jem-pink mb-3">Shana Elmsford</h3>
+                    <p class="text-md leading-relaxed">
+                        The drummer and fashion designer of the group. Shana is artistic, supportive, and brings a unique style to the band's look and sound.
+                    </p>
+                    <div class="mt-4 text-jem-gold text-2xl">
+                        <i class="fas fa-drum"></i> <i class="fas fa-tshirt"></i> <i class="fas fa-palette"></i>
+                    </div>
+                </div>
+
+                <!-- Raya Alonso Card -->
+                <div class="bg-gray-700 p-8 rounded-3xl shadow-xl border-4 border-jem-purple card-hover-effect lg:col-start-2 lg:col-span-2">
+                    <img src="https://placehold.co/300x300/8A2BE2/FFFFFF?text=Raya" alt="Raya Alonso" class="w-48 h-48 mx-auto rounded-full border-4 border-jem-gold mb-6 object-cover">
+                    <h3 class="text-3xl font-bold text-jem-purple mb-3">Raya Alonso</h3>
+                    <p class="text-md leading-relaxed">
+                        The newest addition to the band, Raya is a talented percussionist who brings a vibrant energy and diverse rhythms to The Holograms' sound.
+                    </p>
+                    <div class="mt-4 text-jem-gold text-2xl">
+                        <i class="fas fa-bongos"></i> <i class="fas fa-hand-sparkles"></i> <i class="fas fa-star-of-life"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Music Section -->
+    <section id="music" class="py-20 px-4 bg-gray-900 text-gray-200 animate-on-scroll">
+        <div class="container mx-auto text-center">
+            <h2 class="text-5xl font-bold text-jem-pink mb-12 font-pacifico typewriter">The Music of Jem</h2>
+            <p class="text-lg mb-8 max-w-3xl mx-auto">
+                Jem and the Holograms are known for their catchy, empowering, and truly outrageous songs. Their music is the heart of their message, inspiring fans to be themselves and chase their dreams.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+                <div class="bg-gray-800 p-8 rounded-3xl shadow-xl border-4 border-jem-blue card-hover-effect">
+                    <h3 class="text-3xl font-bold text-jem-blue mb-4">Featured Hit: "Truly Outrageous"</h3>
+                    <p class="text-md mb-6 leading-relaxed">
+                        The iconic theme song that perfectly encapsulates the spirit of Jem and the Holograms. It's a declaration of individuality, glamour, and rock 'n' roll.
+                    </p>
+                    <div class="relative pt-[56.25%] mb-6">
+                        <!-- Placeholder for an embedded video. In a real scenario, this would be an actual YouTube embed. -->
+                        <iframe class="absolute top-0 left-0 w-full h-full rounded-xl" src="https://www.youtube.com/embed/28d022b_u9I?si=yvE7Fh9u2GqR-W9N" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <button class="bg-jem-pink text-white text-lg font-bold py-3 px-6 rounded-full shadow-lg hover:bg-jem-purple transition-all duration-300 transform hover:scale-105">
+                        Listen Now <i class="fas fa-play-circle ml-2"></i>
+                    </button>
+                </div>
+
+                <div class="bg-gray-800 p-8 rounded-3xl shadow-xl border-4 border-jem-purple card-hover-effect">
+                    <h3 class="text-3xl font-bold text-jem-purple mb-4">Classic Tracks</h3>
+                    <ul class="list-disc list-inside text-left text-lg space-y-2 mb-6">
+                        <li class="flex items-center"><i class="fas fa-compact-disc mr-3 text-jem-gold"></i> Jem Theme</li>
+                        <li class="flex items-center"><i class="fas fa-compact-disc mr-3 text-jem-gold"></i> I'm Still Here</li>
+                        <li class="flex items-center"><i class="fas fa-compact-disc mr-3 text-jem-gold"></i> Glitter and Gold</li>
+                        <li class="flex items-center"><i class="fas fa-compact-disc mr-3 text-jem-gold"></i> We're Off and Running</li>
+                        <li class="flex items-center"><i class="fas fa-compact-disc mr-3 text-jem-gold"></i> Who Is He?</li>
+                        <li class="flex items-center"><i class="fas fa-compact-disc mr-3 text-jem-gold"></i> The Music's in the Memory</li>
+                    </ul>
+                    <p class="text-md leading-relaxed mb-6">
+                        Explore the full discography and relive the magic of Jem's music!
+                    </p>
+                    <button class="bg-jem-blue text-white text-lg font-bold py-3 px-6 rounded-full shadow-lg hover:bg-jem-pink transition-all duration-300 transform hover:scale-105">
+                        View Full Discography <i class="fas fa-compact-disc ml-2"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Parallax Section 2 - Misfits -->
+    <section class="parallax-section parallax-misfits h-[50vh] flex items-center justify-center text-white text-5xl font-bold text-shadow-lg">
+        <span class="bg-black bg-opacity-50 p-6 rounded-lg font-orbitron">"We are The Misfits! Our music is better!"</span>
+    </section>
+
+    <!-- The Misfits Section -->
+    <section id="misfits" class="py-20 px-4 bg-gray-800 text-gray-200 animate-on-scroll">
+        <div class="container mx-auto text-center">
+            <h2 class="text-5xl font-bold text-red-500 mb-12 font-pacifico typewriter">The Misfits</h2>
+            <p class="text-lg mb-8 max-w-3xl mx-auto">
+                Every hero needs a rival, and Jem's are The Misfits! Led by the fiery Pizzazz, this punk-rock band is always trying to outshine Jem and the Holograms, often resorting to outrageous schemes.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <!-- Pizzazz Card -->
+                <div class="bg-gray-700 p-8 rounded-3xl shadow-xl border-4 border-red-600 card-hover-effect">
+                    <img src="https://placehold.co/300x300/DC2626/FFFFFF?text=Pizzazz" alt="Pizzazz" class="w-48 h-48 mx-auto rounded-full border-4 border-gray-400 mb-6 object-cover">
+                    <h3 class="text-3xl font-bold text-red-500 mb-3">Pizzazz (Phyllis Gabor)</h3>
+                    <p class="text-md leading-relaxed">
+                        The arrogant and ambitious leader of The Misfits. Pizzazz is a powerful vocalist with a fierce personality, constantly scheming to sabotage Jem.
+                    </p>
+                    <div class="mt-4 text-gray-400 text-2xl">
+                        <i class="fas fa-skull"></i> <i class="fas fa-fire-alt"></i> <i class="fas fa-crown"></i>
+                    </div>
+                </div>
+
+                <!-- Roxy Card -->
+                <div class="bg-gray-700 p-8 rounded-3xl shadow-xl border-4 border-red-600 card-hover-effect">
+                    <img src="https://placehold.co/300x300/DC2626/FFFFFF?text=Roxy" alt="Roxy" class="w-48 h-48 mx-auto rounded-full border-4 border-gray-400 mb-6 object-cover">
+                    <h3 class="text-3xl font-bold text-red-500 mb-3">Roxy (Roxanne Pellegrini)</h3>
+                    <p class="text-md leading-relaxed">
+                        The tough and often dim-witted guitarist of The Misfits. Roxy is the muscle of the group, always ready for a fight or to cause trouble.
+                    </p>
+                    <div class="mt-4 text-gray-400 text-2xl">
+                        <i class="fas fa-bolt"></i> <i class="fas fa-fist-raised"></i> <i class="fas fa-guitar"></i>
+                    </div>
+                </div>
+
+                <!-- Stormer Card -->
+                <div class="bg-gray-700 p-8 rounded-3xl shadow-xl border-4 border-red-600 card-hover-effect">
+                    <img src="https://placehold.co/300x300/DC2626/FFFFFF?text=Stormer" alt="Stormer" class="w-48 h-48 mx-auto rounded-full border-4 border-gray-400 mb-6 object-cover">
+                    <h3 class="text-3xl font-bold text-red-500 mb-3">Stormer (Mary Phillips)</h3>
+                    <p class="text-md leading-relaxed">
+                        The kind-hearted and often naive keyboardist of The Misfits. Stormer is the only member who sometimes shows remorse or kindness, making her the most conflicted.
+                    </p>
+                    <div class="mt-4 text-gray-400 text-2xl">
+                        <i class="fas fa-cloud-showers-heavy"></i> <i class="fas fa-heart"></i> <i class="fas fa-keyboard"></i>
+                    </div>
+                </div>
+
+                <!-- Jetta Card (if applicable, for a 4th member) -->
+                <div class="bg-gray-700 p-8 rounded-3xl shadow-xl border-4 border-red-600 card-hover-effect lg:col-start-2">
+                    <img src="https://placehold.co/300x300/DC2626/FFFFFF?text=Jetta" alt="Jetta" class="w-48 h-48 mx-auto rounded-full border-4 border-gray-400 mb-6 object-cover">
+                    <h3 class="text-3xl font-bold text-red-500 mb-3">Jetta (Sheila Burns)</h3>
+                    <p class="text-md leading-relaxed">
+                        The saxophone player and "British" member of The Misfits, Jetta is a master manipulator and often helps Pizzazz concoct her schemes.
+                    </p>
+                    <div class="mt-4 text-gray-400 text-2xl">
+                        <i class="fas fa-saxophone"></i> <i class="fas fa-mask"></i> <i class="fas fa-globe-europe"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="py-20 px-4 bg-gray-900 text-gray-200 animate-on-scroll">
+        <div class="container mx-auto text-center">
+            <h2 class="text-5xl font-bold text-jem-gold mb-12 font-pacifico typewriter">Truly Outrageous Merchandise!</h2>
+            <p class="text-lg mb-12 max-w-3xl mx-auto">
+                Bring the glamour home with our exclusive collection of Jem and the Holograms merchandise!
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <!-- Product 1: Album -->
+                <div class="product-card">
+                    <img src="https://placehold.co/300x300/FFD700/000000?text=Album+Cover" alt="Jem Album" class="w-64 h-64 mx-auto object-cover">
+                    <h3 class="text-2xl font-bold text-jem-pink mb-2">Jem's Greatest Hits</h3>
+                    <p class="text-md text-gray-400 mb-4">Relive all the classic tracks!</p>
+                    <span class="text-3xl font-bold text-jem-gold block mb-4">$24.99</span>
+                    <button>Buy Now <i class="fas fa-shopping-cart ml-2"></i></button>
+                </div>
+                <!-- Product 2: Doll -->
+                <div class="product-card">
+                    <img src="https://placehold.co/300x300/FF69B4/FFFFFF?text=Jem+Doll" alt="Jem Doll" class="w-64 h-64 mx-auto object-cover">
+                    <h3 class="text-2xl font-bold text-jem-purple mb-2">Jem Fashion Doll</h3>
+                    <p class="text-md text-gray-400 mb-4">Poseable doll with authentic outfits!</p>
+                    <span class="text-3xl font-bold text-jem-gold block mb-4">$39.99</span>
+                    <button>Buy Now <i class="fas fa-shopping-cart ml-2"></i></button>
+                </div>
+                <!-- Product 3: T-Shirt -->
+                <div class="product-card">
+                    <img src="https://placehold.co/300x300/1E90FF/FFFFFF?text=Jem+T-Shirt" alt="Jem T-Shirt" class="w-64 h-64 mx-auto object-cover">
+                    <h3 class="text-2xl font-bold text-jem-blue mb-2">Truly Outrageous T-Shirt</h3>
+                    <p class="text-md text-gray-400 mb-4">Wear your Jem pride!</p>
+                    <span class="text-3xl font-bold text-jem-gold block mb-4">$29.99</span>
+                    <button>Buy Now <i class="fas fa-shopping-cart ml-2"></i></button>
+                </div>
+                <!-- Product 4: Poster -->
+                <div class="product-card">
+                    <img src="https://placehold.co/300x300/FF69B4/FFFFFF?text=Jem+Poster" alt="Jem Poster" class="w-64 h-64 mx-auto object-cover">
+                    <h3 class="text-2xl font-bold text-jem-pink mb-2">Concert Poster</h3>
+                    <p class="text-md text-gray-400 mb-4">Limited edition tour poster!</p>
+                    <span class="text-3xl font-bold text-jem-gold block mb-4">$19.99</span>
+                    <button>Buy Now <i class="fas fa-shopping-cart ml-2"></i></button>
+                </div>
+                <!-- Product 5: Vinyl -->
+                <div class="product-card">
+                    <img src="https://placehold.co/300x300/8A2BE2/FFFFFF?text=Jem+Vinyl" alt="Jem Vinyl" class="w-64 h-64 mx-auto object-cover">
+                    <h3 class="text-2xl font-bold text-jem-purple mb-2">Original Soundtrack Vinyl</h3>
+                    <p class="text-md text-gray-400 mb-4">For the true collector!</p>
+                    <span class="text-3xl font-bold text-jem-gold block mb-4">$49.99</span>
+                    <button>Buy Now <i class="fas fa-shopping-cart ml-2"></i></button>
+                </div>
+                <!-- Product 6: Mug -->
+                <div class="product-card">
+                    <img src="https://placehold.co/300x300/1E90FF/FFFFFF?text=Jem+Mug" alt="Jem Mug" class="w-64 h-64 mx-auto object-cover">
+                    <h3 class="text-2xl font-bold text-jem-blue mb-2">Synergy Mug</h3>
+                    <p class="text-md text-gray-400 mb-4">Start your day with Synergy!</p>
+                    <span class="text-3xl font-bold text-jem-gold block mb-4">$14.99</span>
+                    <button>Buy Now <i class="fas fa-shopping-cart ml-2"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tour Dates Section -->
+    <section id="tour" class="py-20 px-4 bg-gray-800 text-gray-200 animate-on-scroll">
+        <div class="container mx-auto text-center max-w-3xl">
+            <h2 class="text-5xl font-bold text-jem-blue mb-12 font-pacifico typewriter">Upcoming Tour Dates</h2>
+            <p class="text-lg mb-8">
+                Catch Jem and the Holograms live in concert! Don't miss your chance to see a truly outrageous show!
+            </p>
+            <div class="space-y-4">
+                <div class="tour-date-item">
+                    <div>
+                        <div class="date">AUG 15, 2025</div>
+                        <div class="location">Starlight Music Hall, Los Angeles</div>
+                        <div class="details">Special Guest: Rio Pacheco</div>
+                    </div>
+                    <button class="bg-jem-pink text-white text-md font-bold py-2 px-4 rounded-full hover:bg-jem-purple transition-colors duration-300">Tickets <i class="fas fa-ticket-alt ml-2"></i></button>
+                </div>
+                <div class="tour-date-item">
+                    <div>
+                        <div class="date">SEP 02, 2025</div>
+                        <div class="location">Neon City Arena, New York</div>
+                        <div class="details">Holograms' 40th Anniversary Show!</div>
+                    </div>
+                    <button class="bg-jem-pink text-white text-md font-bold py-2 px-4 rounded-full hover:bg-jem-purple transition-colors duration-300">Tickets <i class="fas fa-ticket-alt ml-2"></i></button>
+                </div>
+                <div class="tour-date-item">
+                    <div>
+                        <div class="date">OCT 10, 2025</div>
+                        <div class="location">Glitter Dome, London</div>
+                        <div class="details">European Tour Kick-off!</div>
+                    </div>
+                    <button class="bg-jem-pink text-white text-md font-bold py-2 px-4 rounded-full hover:bg-jem-purple transition-colors duration-300">Tickets <i class="fas fa-ticket-alt ml-2"></i></button>
+                </div>
+                <div class="tour-date-item">
+                    <div>
+                        <div class="date">NOV 20, 2025</div>
+                        <div class="location">Tokyo Pop Stage, Tokyo</div>
+                        <div class="details">Featuring new holographic effects!</div>
+                    </div>
+                    <button class="bg-jem-pink text-white text-md font-bold py-2 px-4 rounded-full hover:bg-jem-purple transition-colors duration-300">Tickets <i class="fas fa-ticket-alt ml-2"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-20 px-4 bg-gray-900 text-gray-200 animate-on-scroll">
+        <div class="container mx-auto text-center">
+            <h2 class="text-5xl font-bold text-jem-pink mb-12 font-pacifico typewriter">Glamour & Glitter Gallery</h2>
+            <p class="text-lg mb-8 max-w-3xl mx-auto">
+                Step into the spotlight and explore a collection of truly outrageous moments from the world of Jem and the Holograms!
+            </p>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Gallery Item 1 -->
+                <div class="relative group cursor-pointer overflow-hidden rounded-xl shadow-lg border-2 border-jem-pink transform hover:scale-105 transition-transform duration-300" onclick="openModal('https://placehold.co/800x600/FF69B4/FFFFFF?text=Jem+Live+Concert');">
+                    <img src="https://placehold.co/400x300/FF69B4/FFFFFF?text=Jem+Concert" alt="Jem Live Concert" class="w-full h-48 object-cover rounded-t-xl transition-transform duration-300 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <p class="text-white text-xl font-bold">Live Performance</p>
+                    </div>
+                </div>
+                <!-- Gallery Item 2 -->
+                <div class="relative group cursor-pointer overflow-hidden rounded-xl shadow-lg border-2 border-jem-purple transform hover:scale-105 transition-transform duration-300" onclick="openModal('https://placehold.co/800x600/8A2BE2/FFFFFF?text=The+Holograms+Group');">
+                    <img src="https://placehold.co/400x300/8A2BE2/FFFFFF?text=Holograms+Group" alt="The Holograms Group" class="w-full h-48 object-cover rounded-t-xl transition-transform duration-300 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <p class="text-white text-xl font-bold">Band Together</p>
+                    </div>
+                </div>
+                <!-- Gallery Item 3 -->
+                <div class="relative group cursor-pointer overflow-hidden rounded-xl shadow-lg border-2 border-red-500 transform hover:scale-105 transition-transform duration-300" onclick="openModal('https://placehold.co/800x600/DC2626/FFFFFF?text=Misfits+Rock');">
+                    <img src="https://placehold.co/400x300/DC2626/FFFFFF?text=Misfits+Performing" alt="Misfits Rock" class="w-full h-48 object-cover rounded-t-xl transition-transform duration-300 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <p class="text-white text-xl font-bold">Misfits Mayhem</p>
+                    </div>
+                </div>
+                <!-- Gallery Item 4 -->
+                <div class="relative group cursor-pointer overflow-hidden rounded-xl shadow-lg border-2 border-jem-blue transform hover:scale-105 transition-transform duration-300" onclick="openModal('https://placehold.co/800x600/1E90FF/FFFFFF?text=Synergy+Power');">
+                    <img src="https://placehold.co/400x300/1E90FF/FFFFFF?text=Synergy" alt="Synergy Power" class="w-full h-48 object-cover rounded-t-xl transition-transform duration-300 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <p class="text-white text-xl font-bold">Synergy's Magic</p>
+                    </div>
+                </div>
+                <!-- Gallery Item 5 -->
+                <div class="relative group cursor-pointer overflow-hidden rounded-xl shadow-lg border-2 border-jem-gold transform hover:scale-105 transition-transform duration-300" onclick="openModal('https://placehold.co/800x600/FFD700/FFFFFF?text=Jem+Fashion');">
+                    <img src="https://placehold.co/400x300/FFD700/FFFFFF?text=Jem+Fashion" alt="Jem Fashion" class="w-full h-48 object-cover rounded-t-xl transition-transform duration-300 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <p class="text-white text-xl font-bold">Fashion Forward</p>
+                    </div>
+                </div>
+                <!-- Gallery Item 6 -->
+                <div class="relative group cursor-pointer overflow-hidden rounded-xl shadow-lg border-2 border-jem-pink transform hover:scale-105 transition-transform duration-300" onclick="openModal('https://placehold.co/800x600/FF69B4/FFFFFF?text=Starlight+Girls');">
+                    <img src="https://placehold.co/400x300/FF69B4/FFFFFF?text=Starlight+Girls" alt="Starlight Girls" class="w-full h-48 object-cover rounded-t-xl transition-transform duration-300 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <p class="text-white text-xl font-bold">Starlight Girls</p>
+                    </div>
+                </div>
+                <!-- Gallery Item 7 -->
+                <div class="relative group cursor-pointer overflow-hidden rounded-xl shadow-lg border-2 border-jem-purple transform hover:scale-105 transition-transform duration-300" onclick="openModal('https://placehold.co/800x600/8A2BE2/FFFFFF?text=Rio+Pacheco');">
+                    <img src="https://placehold.co/400x300/8A2BE2/FFFFFF?text=Rio+Pacheco" alt="Rio Pacheco" class="w-full h-48 object-cover rounded-t-xl transition-transform duration-300 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <p class="text-white text-xl font-bold">Rio & Jem</p>
+                    </div>
+                </div>
+                <!-- Gallery Item 8 -->
+                <div class="relative group cursor-pointer overflow-hidden rounded-xl shadow-lg border-2 border-red-500 transform hover:scale-105 transition-transform duration-300" onclick="openModal('https://placehold.co/800x600/DC2626/FFFFFF?text=Clash+of+Bands');">
+                    <img src="https://placehold.co/400x300/DC2626/FFFFFF?text=Clash+of+Bands" alt="Clash of Bands" class="w-full h-48 object-cover rounded-t-xl transition-transform duration-300 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <p class="text-white text-xl font-bold">Band Battle</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Modal for Image Gallery -->
+    <div id="imageModal" class="modal">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-4 bg-gray-800 text-gray-200 animate-on-scroll">
+        <div class="container mx-auto text-center max-w-2xl">
+            <h2 class="text-5xl font-bold text-jem-purple mb-12 font-pacifico typewriter">Get in Touch!</h2>
+            <p class="text-lg mb-8">
+                Have a question about Jem, or just want to share your favorite truly outrageous moment? Reach out to us!
+            </p>
+            <form class="bg-gray-700 p-8 rounded-3xl shadow-xl border-4 border-jem-purple">
+                <div class="mb-6 text-left">
+                    <label for="name" class="block text-lg font-semibold text-jem-light-gray mb-2">Name</label>
+                    <input type="text" id="name" name="name" class="w-full p-4 rounded-lg bg-gray-600 border border-gray-500 text-white focus:outline-none focus:ring-2 focus:ring-jem-pink" placeholder="Your Name" required>
+                </div>
+                <div class="mb-6 text-left">
+                    <label for="email" class="block text-lg font-semibold text-jem-light-gray mb-2">Email</label>
+                    <input type="email" id="email" name="email" class="w-full p-4 rounded-lg bg-gray-600 border border-gray-500 text-white focus:outline-none focus:ring-2 focus:ring-jem-pink" placeholder="your.email@example.com" required>
+                </div>
+                <div class="mb-6 text-left">
+                    <label for="message" class="block text-lg font-semibold text-jem-light-gray mb-2">Message</label>
+                    <textarea id="message" name="message" rows="6" class="w-full p-4 rounded-lg bg-gray-600 border border-gray-500 text-white focus:outline-none focus:ring-2 focus:ring-jem-pink resize-y" placeholder="Your truly outrageous message..." required></textarea>
+                </div>
+                <button type="submit" class="bg-jem-pink text-white text-xl font-bold py-4 px-8 rounded-full shadow-lg hover:bg-jem-blue transition-all duration-300 transform hover:scale-105">
+                    Send Message <i class="fas fa-paper-plane ml-2"></i>
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 py-12 px-4 text-gray-400 text-center border-t border-gray-700">
+        <div class="container mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-8">
+                <div class="mb-6 md:mb-0">
+                    <h3 class="text-2xl font-bold text-jem-pink mb-2 font-pacifico">JEM</h3>
+                    <p>&copy; 2023 Jem and the Holograms Fan Site. All rights reserved.</p>
+                </div>
+                <div class="flex space-x-6 text-2xl">
+                    <a href="#" class="hover:text-jem-pink transition-colors duration-300"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="hover:text-jem-pink transition-colors duration-300"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="hover:text-jem-pink transition-colors duration-300"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="hover:text-jem-pink transition-colors duration-300"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <p class="text-sm">
+                Disclaimer: This is a fan-made website and is not affiliated with Hasbro or any official Jem and the Holograms entities.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button onclick="topFunction()" id="backToTopBtn" title="Go to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // JavaScript for interactivity and animations
+
+        // 1. Smooth Scrolling for Navigation Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // 2. Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const closeMobileMenuBtn = document.getElementById('closeMobileMenuBtn');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+        });
+
+        closeMobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+        });
+
+        // Close mobile menu when clicking outside (optional, but good UX)
+        document.addEventListener('click', (event) => {
+            if (!mobileMenu.contains(event.target) && !mobileMenuBtn.contains(event.target) && mobileMenu.classList.contains('active')) {
+                mobileMenu.classList.remove('active');
+            }
+        });
+
+
+        // 3. Scroll-triggered Animations (Fade In Up)
+        const animateOnScrollElements = document.querySelectorAll('.animate-on-scroll');
+
+        const observerOptions = {
+            root: null, // relative to the viewport
+            rootMargin: '0px',
+            threshold: 0.1 // 10% of the element must be visible
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target); // Stop observing once animated
+                }
+            });
+        }, observerOptions);
+
+        animateOnScrollElements.forEach(element => {
+            observer.observe(element);
+        });
+
+        // 4. Back to Top Button functionality
+        const backToTopBtn = document.getElementById("backToTopBtn");
+
+        // When the user scrolls down 200px from the top of the document, show the button
+        window.onscroll = function() {scrollFunction()};
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                backToTopBtn.style.display = "block";
+            } else {
+                backToTopBtn.style.display = "none";
+            }
+        }
+
+        // When the user clicks on the button, scroll to the top of the document
+        function topFunction() {
+            document.body.scrollTop = 0; // For Safari
+            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        }
+
+        // 5. Image Gallery Modal Functionality
+        const modal = document.getElementById("imageModal");
+        const modalImg = document.getElementById("modalImage");
+
+        function openModal(src) {
+            modal.style.display = "flex"; // Use flex to center content
+            modalImg.src = src;
+        }
+
+        function closeModal() {
+            modal.style.display = "none";
+        }
+
+        // Close modal when clicking outside the image
+        modal.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+
+        // 6. Canvas Background Animation (Sparkling Stars & Shooting Stars)
+        const canvas = document.getElementById('starCanvas');
+        const ctx = canvas.getContext('2d');
+        let stars = [];
+        let shootingStars = [];
+        const numStars = 250; // Increased number of stars
+        const numShootingStars = 3; // Number of simultaneous shooting stars
+
+        // Star object constructor
+        function Star(x, y, radius, color) {
+            this.x = x;
+            this.y = y;
+            this.radius = radius;
+            this.color = color;
+            this.alpha = Math.random(); // For twinkling effect
+            this.alphaSpeed = Math.random() * 0.02 + 0.005; // Speed of twinkling
+            this.direction = Math.random() > 0.5 ? 1 : -1; // Direction of twinkling
+        }
+
+        // Draw star method
+        Star.prototype.draw = function() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+            ctx.fillStyle = `rgba(${this.color}, ${this.alpha})`;
+            ctx.fill();
+        };
+
+        // Update star method (for twinkling)
+        Star.prototype.update = function() {
+            this.alpha += this.alphaSpeed * this.direction;
+            if (this.alpha > 1 || this.alpha < 0) {
+                this.direction *= -1; // Reverse twinkling direction
+                this.alpha = Math.max(0, Math.min(1, this.alpha)); // Clamp alpha
+            }
+        };
+
+        // Shooting Star object constructor
+        function ShootingStar(x, y, length, speed, angle, color) {
+            this.x = x;
+            this.y = y;
+            this.length = length;
+            this.speed = speed;
+            this.angle = angle; // Angle in radians
+            this.color = color;
+            this.alpha = 1;
+            this.fadeSpeed = 0.02;
+        }
+
+        // Draw shooting star method
+        ShootingStar.prototype.draw = function() {
+            ctx.save();
+            ctx.translate(this.x, this.y);
+            ctx.rotate(this.angle);
+            ctx.beginPath();
+            // Create a gradient for the tail
+            const gradient = ctx.createLinearGradient(0, 0, -this.length, 0);
+            gradient.addColorStop(0, `rgba(${this.color}, ${this.alpha})`);
+            gradient.addColorStop(1, `rgba(${this.color}, 0)`);
+            ctx.strokeStyle = gradient;
+            ctx.lineWidth = 2;
+            ctx.lineCap = 'round';
+            ctx.moveTo(0, 0);
+            ctx.lineTo(-this.length, 0);
+            ctx.stroke();
+            ctx.restore();
+        };
+
+        // Update shooting star method
+        ShootingStar.prototype.update = function() {
+            this.x += Math.cos(this.angle) * this.speed;
+            this.y += Math.sin(this.angle) * this.speed;
+            this.alpha -= this.fadeSpeed;
+        };
+
+        // Create initial stars
+        function createStars() {
+            stars = []; // Clear existing stars
+            for (let i = 0; i < numStars; i++) {
+                const x = Math.random() * canvas.width;
+                const y = Math.random() * canvas.height;
+                const radius = Math.random() * 1.5 + 0.5; // Small stars
+                const color = '255, 255, 255'; // White stars
+                stars.push(new Star(x, y, radius, color));
+            }
+        }
+
+        // Create a new shooting star
+        function spawnShootingStar() {
+            const startX = Math.random() * canvas.width;
+            const startY = Math.random() * canvas.height * 0.5; // Start from top half
+            const length = Math.random() * 100 + 50; // Length of the tail
+            const speed = Math.random() * 5 + 2; // Speed of the star
+            const angle = Math.PI / 4 + (Math.random() * Math.PI / 2 - Math.PI / 4); // Angle between 0 and PI/2 (down-right)
+            const color = '255, 215, 0'; // Gold color
+            shootingStars.push(new ShootingStar(startX, startY, length, speed, angle, color));
+        }
+
+        // Animation loop
+        function animateCanvas() {
+            requestAnimationFrame(animateCanvas);
+            ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas
+
+            // Update and draw twinkling stars
+            stars.forEach(star => {
+                star.update();
+                star.draw();
+            });
+
+            // Update and draw shooting stars
+            shootingStars = shootingStars.filter(s => s.alpha > 0); // Remove faded stars
+            shootingStars.forEach(s => {
+                s.update();
+                s.draw();
+            });
+
+            // Spawn new shooting stars if needed
+            if (shootingStars.length < numShootingStars && Math.random() < 0.01) { // Random chance to spawn
+                spawnShootingStar();
+            }
+        }
+
+        // Resize canvas to fill window
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            createStars(); // Re-initialize stars on resize to distribute them correctly
+            shootingStars = []; // Clear shooting stars on resize
+        }
+
+        // Initialize canvas and start animation when window loads
+        window.addEventListener('load', () => {
+            resizeCanvas(); // Initial resize
+            animateCanvas(); // Start the animation loop
+        });
+
+        // Re-size canvas when window is resized
+        window.addEventListener('resize', resizeCanvas);
+
+
+        // 7. Dynamic Sparkle Overlay for Hero Section
+        const sparkleOverlay = document.getElementById('sparkleOverlay');
+        const numSparkles = 50; // Number of sparkles
+
+        function createSparkle() {
+            const sparkle = document.createElement('div');
+            sparkle.classList.add('sparkle-effect');
+            const size = Math.random() * 5 + 2; // Size between 2px and 7px
+            sparkle.style.width = `${size}px`;
+            sparkle.style.height = `${size}px`;
+            sparkle.style.left = `${Math.random() * 100}%`;
+            sparkle.style.top = `${Math.random() * 100}%`;
+            sparkle.style.animationDuration = `${Math.random() * 1.5 + 1}s`; // Duration between 1s and 2.5s
+            sparkle.style.animationDelay = `${Math.random() * 2}s`; // Random delay
+            sparkleOverlay.appendChild(sparkle);
+
+            // Remove sparkle after its animation to prevent accumulation
+            sparkle.addEventListener('animationend', () => {
+                sparkle.remove();
+                // Re-add a new sparkle to maintain the count
+                createSparkle();
+            });
+        }
+
+        // Create initial sparkles
+        for (let i = 0; i < numSparkles; i++) {
+            createSparkle();
+        }
+    </script>
+</body>
+</html>
